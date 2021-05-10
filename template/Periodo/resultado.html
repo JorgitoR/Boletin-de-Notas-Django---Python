@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+
+
+{% block contenido %}
+
+
+<nav arial-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item active">
+			<a href="{% url 'ListaPeriodo' %}">
+				Lista
+			</a>
+		</li>
+
+		<li class="breadcrumb-item active">
+			<a href="">
+				Periodo: {{periodo.periodo}}
+			</a>
+		</li>
+
+		<li class="breadcrumb-item active">
+			Resultados
+		</li>
+	</ol>
+</nav>
+
+<h2 class="mb-3">
+	Periodo: {{periodo.periodo}}
+</h2>
+
+
+<div class="card">
+	<div class="card-header">
+		Estudiante: 
+		<span class="badge badge-pill badge-primary float-rigth">
+			Promedio general del periodo: {{periodo_avg.promedio}}
+		</span>
+	</div>
+</div>
+
+<table class="table mb-0">
+	<thead>
+		<tr>
+			<th>
+				Materia
+			</th>
+			<th>
+				Nota
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		{% for periodo in perido_materia %}
+		<tr>
+			<td>{{periodo.materia}}</td>
+			<td>{{periodo.nota}}</td>
+
+
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+
+<div id="container" style="width: 75%; margin: auto;">
+	<canvas id="barras-chart"></canvas>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+  <script>
+  	
+   var config = {
+      type: 'bar',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '#0DA8CE', '#0DCE9C', '#E58204', '#E504DB', '#7B04E5'
+          ],
+          label: 'Periodo  {{periodo.periodo}}'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('barras-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
+
+
+{% endblock %}

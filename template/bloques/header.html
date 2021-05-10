@@ -1,0 +1,154 @@
+<div class="div_main">
+	<div class="sub_div sub_div_contenido">
+		<div class="div_logo">
+			<a href="/" class="a_titulo">
+				Solinces 
+			</a>
+		</div>
+	
+	<div class="div_left">
+
+			<div>
+			
+			</div>
+			
+			{% if request.user.is_authenticated %}
+	
+			<div class="div_user">
+				Bienvenido {{request.user}}
+			</div>
+
+			<div class="div_login">
+				<a href="{% url 'singup_estu' %}" class="btn_reg">
+					Log Out
+				</a>
+			</div>
+
+			{% else %}
+			<div class="column div_registrar">
+				<a href="{% url 'singup_estu' %}" class="btn_reg">
+					Registrate
+				</a>
+			</div>
+
+			<div class="column div_login">
+				<a href="{% url 'login' %}" class="btn_login">
+					Iniciar sesion
+				</a>
+			</div>
+			{% endif %}
+
+	</div>	
+
+	</div>
+
+</div>
+
+
+<style>
+
+	@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+	
+	.div_main{
+		background: #fff;
+		border-bottom: 1px solid #e6e6e6;
+		height: 50px;
+		align-items: stretch;
+		padding: 0;
+		font-size:13px;
+		width: 100%;
+		color: #333;
+	}
+
+	.sub_div{
+
+		width: 90%;
+		margin: auto;
+		height: 50px;
+	}
+
+	.div_logo{
+		grid-area: derecha;
+	}
+
+
+	.div_left{
+		grid-area: lef;
+	}
+
+	.sub_div_contenido{
+		display: grid;
+		grid-template-columns:auto auto;
+		grid-template-areas: "derecha lef";
+		grid-gap: 4;
+	}
+
+	.div_logo, .div_registrar, .div_login, .div_user{
+		display: grid;
+
+		-webkit-box-align:center;
+		-moz-box-align:center;
+		-o-box-align:center;
+		-ms-flex-align:center;
+		-webkit-align-items:center;
+		align-items: center;
+	}
+
+	.div_left{
+
+		display: grid;
+		grid-template-columns:auto 160px 160px;
+	}
+
+	.a_titulo{
+		font-family: 'Roboto', sans-serif;
+		font-size: 20px;
+		color: #333;
+		text-decoration: none;
+
+	}
+
+	.btn_reg, .btn_login{
+
+		width: 150px;
+		display: block;
+		margin: auto;
+		background: #03a9f4;
+		border-radius: 4px;
+    	-webkit-box-sizing: border-box;
+    	-moz-box-sizing: border-box;
+    	box-sizing: border-box;
+    	color: #fff;
+    	cursor: pointer;
+    	font-family: 'Roboto', sans-serif;
+    	font-size: 13px;
+    	padding: 8px .8em 6px;
+    	text-decoration: none;
+
+    	-moz-user-select: none;
+    	-ms-user-select: none;
+    	-webkit-tap-highlight-color: transparent;
+    	-webkit-user-select: none;
+    	user-select: none;
+    	-webkit-transition: .2s;
+    	-moz-transition: .2s;
+    	-o-transition: .2s;
+    	-ms-transition: .2s;
+
+    	transition: .2s;
+    	text-align: center;
+
+
+    	white-space: nowrap;
+    	overflow: hidden;
+    	-o-text-overflow: ellipsis;
+    	text-overflow: ellipsis;
+    	-webkit-appearance: none;
+    	-moz-appearance: none;
+    	appearance: none;
+    	outline: 0;
+
+	}
+
+</style>

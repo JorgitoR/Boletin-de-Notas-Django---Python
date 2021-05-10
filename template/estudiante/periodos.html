@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+<table class="table mb-0">
+	<thead>
+		<tr>
+			<th>
+				Periodo
+			</th>
+			<th>
+				Ver resulatdos
+			</th>
+
+			<th>
+				Ver resulatdos Api
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		{% for periodo in periodos %}
+
+		<tr>
+			<td>{{periodo.periodo}}</td>
+
+			<td>
+				<a href="{% url 'periodo' periodo.periodo.pk %}">Ver resultado</a>
+			</td>
+
+			<td>
+				<a href="{% url 'periodo_api' periodo.periodo.pk %}">Ver resultado Api</a>
+			</td>
+
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+
+{% endblock %}
