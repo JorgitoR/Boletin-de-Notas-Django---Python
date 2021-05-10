@@ -3,7 +3,8 @@ from rest_framework import serializers
 from django.urls import reverse_lazy
 
 from django.http import JsonResponse
-from rest_framework.response import Response 
+from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.views import APIView
 
 from django.shortcuts import render, get_object_or_404
@@ -12,7 +13,6 @@ from rest_framework import generics
 
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import AuthenticationForm
-
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
@@ -25,6 +25,7 @@ from rest_framework.authtoken.models import Token
 
 
 from  rest_framework import permissions
+from rest_framework.permissions import IsAuthenticated
 
 
 from Dashboard.models import Notas_periodos, Usuario, Periodo
@@ -52,6 +53,13 @@ class Login(FormView):
 			login(self.request, form.get_user())
 			return super(Login, self).form_valid(form)
 
+
+class Logout(APIView):
+	permission_classes = [IsAuthenticated]
+	def get(self, request, format=None):
+		request.user.auth_token.delete()
+		logout(request)
+		return Response(status=status.HTTP_200_OK)
 
 class DatosJsonViewSet(generics.RetrieveAPIView):
 	qs = Periodo.objects.all()
