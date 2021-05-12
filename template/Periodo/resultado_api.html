@@ -22,19 +22,32 @@
   			
   			url: $pais_ajax.data("url"),
 
+
   			success: function(data){
 
   				var ctx = $pais_ajax[0].getContext("2d");
-          console.log(data.data)
+
+
+          datos = JSON.stringify(data.data);
+          console.log(datos)
+      
   				new Chart(ctx, {
 
   					type: 'bar',
   					data: {
-  						labels: data.data.materias__materia,
+  						labels: $.each(data.data,  function(key, value){
+
+                   value['materias__materia']
+                     
+              }),
   						datasets: [{
   							label: 'Periodo',
   							backgroundColor: 'blue',
-  							data: data.data.materias__nota
+  							data:  $.each(data.data, function(key, value){
+                     
+                   value['materias__nota']
+                  
+                  })
   						}]
   					},
 
