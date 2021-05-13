@@ -18,9 +18,10 @@ def inicio(request):
 
 		if request.user.estudiante:
 			return redirect('ListaPeriodo')
+		elif request.user.director:
+			return redirect('reportes_estudiante')
 		else:
 			return redirect('inicio')
-	
 
 	return render(request, 'inicio.html')
 

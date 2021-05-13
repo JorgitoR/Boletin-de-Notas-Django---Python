@@ -15,10 +15,19 @@
 				
 			</div>
 
-			<div class="div_user">
+			<div class="div_user" style="display: flex;">
 				Bienvenido {{request.user}} 				
 			</div>
 
+			{% if request.user.director %}
+
+			<div class="div_login" style="margin: auto;">
+				<a  class="btn_reg">
+					Director
+				</a>
+			</div>
+			{% else %}
+			{% endif %}
 
 			{{request.user.estudianteusuario.grado.get_grado}}
 
@@ -118,7 +127,7 @@
 	.div_left{
 
 		display: grid;
-		grid-template-columns:auto 100px 160px 160px;
+		grid-template-columns:auto 180px 160px 160px;
 	}
 
 	.a_titulo{
