@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+	
+	<p>
+		Total de estudiante del {{request.GET.grados}} : <strong>({{grados.count}})</strong>
+	</p>
+	{% for grado in grados %}
+			<p>
+				{{grado.usuario}}
+			</p>
+	{% endfor %}
+
+{% endblock %}

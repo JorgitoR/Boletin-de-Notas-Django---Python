@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+	<form method="GET" action='/reportes/looking/'>
+
+		    <div class="div_categoria">
+            <select id="categoria" class="form-control" name="grados">
+              
+              {% for grado in grados %}
+              <option value="{{ grado }}">{{ grado }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <button type="submit">
+          		Reporte
+          </button>
+		
+	</form>
+	  
+
+{% endblock %}

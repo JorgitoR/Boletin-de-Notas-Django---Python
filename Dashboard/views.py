@@ -6,7 +6,7 @@ from django.views.generic import DetailView, CreateView, ListView
 from django.db.models import Avg
 
 from .forms import EstudiantesRegistro
-from .models import Usuario
+from .models import Usuario, EstudianteUsuario, grado
 
 
 from django.contrib.auth import login
@@ -93,3 +93,42 @@ class Periodo(DetailView):
 
 		kwargs.update(context)
 		return super().get_context_data(**kwargs)
+
+
+
+######## REPORTES #########
+def parametro_query(param):
+    return param != '' and param is not None
+
+def filtro(request):
+    qs                        = EstudianteUsuario.objects.all()
+    grado_qs     = request.GET.get('grados')
+
+    if parametro_query(grado_qs) and grado_qs != 'Elegir Grado':
+        qs = qs.filter(grado__grado__icontains=grado_qs) 
+
+
+    return qs
+
+def lista_estudiante(request):
+	qs = filtro(request)
+
+	context = {
+
+		'filtro':qs,
+		'grados':grado.objects.all()
+
+	}
+
+	return render(request, 'reportes/estudiante.html', context)
+
+
+def looking(request):
+
+    qs = filtro(request)
+
+    context ={
+        'grados':qs
+    }
+
+    return render(request, 'reportes/looking.html', context)

@@ -2,10 +2,16 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import Usuario
+from .models import Usuario, grado, EstudianteUsuario
 
 
 class EstudiantesRegistro(UserCreationForm):
+
+	grado = forms.ModelChoiceField(
+		queryset = grado.objects.all(),
+		widget = forms.RadioSelect(),
+		required=True
+	)
 
 	class Meta(UserCreationForm.Meta):
 		model = Usuario
@@ -15,4 +21,9 @@ class EstudiantesRegistro(UserCreationForm):
 		user.estudiante = True
 		if commit:
 			user.save()
+
+		grade = self.cleaned_data.get('grado')
+		print(grade)
+		gradoss = EstudianteUsuario.objects.create(usuario=user, grado=grade)
+	
 		return user

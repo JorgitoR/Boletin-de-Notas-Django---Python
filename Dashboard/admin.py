@@ -1,6 +1,12 @@
 from django.contrib import admin
 
-from .models import Usuario, Materia, Notas_periodos, Periodo, EstudianteUsuario
+from .models import (
+	Usuario, 
+	Materia, 
+	Notas_periodos, 
+	Periodo, 
+	EstudianteUsuario, 
+	grado)
 
 
 class UsuarioInline(admin.TabularInline):
@@ -18,3 +24,4 @@ admin.site.register(Periodo, NotasAdmin)
 admin.site.register(Notas_periodos)
 admin.site.register(EstudianteUsuario)
 admin.site.register(Usuario)
+admin.site.register(grado)
