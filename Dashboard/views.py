@@ -119,10 +119,13 @@ def parametro_query(param):
 def filtro(request):
     qs                        = EstudianteUsuario.objects.all()
     grado_qs     = request.GET.get('grados')
+    activos = request.GET.get('activos')
+
+    if parametro_query(activos):
+        qs = qs.filter(usuario__activo=activos) 
 
     if parametro_query(grado_qs) and grado_qs != 'Elegir Grado':
         qs = qs.filter(grado__grado__icontains=grado_qs) 
-
 
     return qs
 

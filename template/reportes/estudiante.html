@@ -15,11 +15,21 @@
 	<form method="GET" action='/reportes/looking/'>
 
 		  <div class="mb-3 container">
+
             <select id="categoria" class="form-control" name="grados">
               
               {% for grado in grados %}
               <option value="{{ grado }}">{{ grado }}</option>
               {% endfor %}
+            </select>
+
+            <br>
+
+            <select id="categoria" class="form-control" name="activos">
+              
+              <option value="True">Activo</option>
+              <option value="False">No Activo</option>
+          
             </select>
 
          	<button type="submit" class="btn btn-success">
