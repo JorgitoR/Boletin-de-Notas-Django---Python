@@ -5,6 +5,11 @@
 <div>
 	<form method="POST">
 		{% csrf_token %}
+
+		<h3>
+			Registrate como {{keyy}}
+		</h3>
+
 		{{form.as_p}}
 		<button type="submit">
 			Registrarce

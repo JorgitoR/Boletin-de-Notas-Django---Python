@@ -11,6 +11,11 @@ class Usuario(AbstractUser):
 	profesor = models.BooleanField(default=False)
 	estudiante = models.BooleanField(default=False)
 
+	activo = models.BooleanField(default=True)
+
+	femenino = models.BooleanField(default=False)
+	masculino = models.BooleanField(default=False)
+
 class grado(models.Model):
 	grado = models.CharField(max_length=10)
 	color = models.CharField(max_length=7, default='#333')

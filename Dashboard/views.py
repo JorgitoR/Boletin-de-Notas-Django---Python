@@ -5,7 +5,7 @@ from django.views.generic import DetailView, CreateView, ListView
 
 from django.db.models import Avg
 
-from .forms import EstudiantesRegistro
+from .forms import EstudiantesRegistro, profesorRegistro
 from .models import Usuario, EstudianteUsuario, grado
 
 
@@ -24,20 +24,35 @@ def inicio(request):
 
 	return render(request, 'inicio.html')
 
-class EstudianteRegistro(CreateView):
+class ProfesorRegistro(CreateView):
 	model = Usuario
-	form_class = EstudiantesRegistro
-	template_name='Usuario/estudiante.html'
-
+	form_class = profesorRegistro
+	template_name = 'Usuario/registro.html'
 
 	def get_context_data(self, **kwargs):
+		kwargs['keyy'] = 'Profesor'
 		return super().get_context_data(**kwargs)
 
 	def form_valid(self, form):
 		usuario = form.save()
 		login(self.request, usuario)
-		return redirect('ListaPeriodo')
+		return redirect('reportes_estudiante')
 
+class EstudianteRegistro(CreateView):
+	model = Usuario
+	form_class = EstudiantesRegistro
+	template_name='Usuario/registro.html'
+
+
+	def get_context_data(self, **kwargs):
+		kwargs['keyy'] = 'Estudiante'
+		return super().get_context_data(**kwargs)
+
+
+	def form_valid(self, form):
+		usuario = form.save()
+		login(self.request, usuario)
+		return redirect('ListaPeriodo')
 
 class ListaPeriodo(ListView):
 	model = Periodo
@@ -126,9 +141,21 @@ def lista_estudiante(request):
 def looking(request):
 
     qs = filtro(request)
+    print(qs)
+
+    mujeres = qs.filter(usuario__femenino=True)
+    contador_m = mujeres.count()
+    hombres = qs.filter(usuario__masculino=True)
+    contador_h = hombres.count()
+
+    labels = ['mujeres', 'hombres']
+    data = [contador_m, contador_h]
+
 
     context ={
-        'grados':qs
+        'grados':qs,
+        'labels':labels,
+        'data':data
     }
 
     return render(request, 'reportes/looking.html', context)
