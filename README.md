@@ -3,7 +3,8 @@
 Una aplicacion de Boletines de Notas, con graficos estadisticos utilizando Chart.js.
 
 ¿Quieres aprender a crear aplicativos funciones?
-- <a href="">Youtube</a>
+- <a href="https://www.youtube.com/channel/UC-0f0AT2xJrUxML6HJTH3Iw">Youtube</a>
+- 
 
 ## Funciones de nuestra App
 - Multiples tipos de Usuarios: Director, Subdirector, Estudiante/padre, Docente
