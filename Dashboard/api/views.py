@@ -27,9 +27,8 @@ from rest_framework.authtoken.models import Token
 from  rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
 
-
-from Dashboard.models import Notas_periodos, Usuario, Periodo
-from .serializers import NotaSerializer, PeriodoSerializer
+from .serializers import NotaSerializer, PeriodoSerializer, EstudianteUserSerializer
+from Dashboard.models import Notas_periodos, Usuario, Periodo, EstudianteUsuario, grado
 
 class Login(FormView):
 	template_name = 'Usuario/login.html'
@@ -69,7 +68,37 @@ class DatosJsonViewSet(generics.RetrieveAPIView):
 	def get_queryset(self, *args, **kwargs):
 		qs = self.get_queryset
 		return qs
-  
+ 
+class reporte_estudiante(APIView):
+	def get(self, request, pk, format=None):
+
+		labels = []
+		
+
+		grado_pk = grado.objects.get(pk=pk)
+		estudiante = EstudianteUsuario.objects.filter(grado=grado_pk)
+		
+		mujer = estudiante.filter(usuario__femenino=True)
+		count_m = mujer.count()
+		hombre = estudiante.filter(usuario__masculino=True)
+		count_h = hombre.count()
+		data = [count_m, count_h]
+
+		for estudiante in estudiante:
+			print(estudiante.usuario)
+			labels.append(estudiante.usuario.username)
+
+		print(labels)
+
+		return Response({
+
+			'data':data,
+			'labels':labels
+		
+		})
+		
+
+
 class PeriodoDetail(APIView):
 
 	def get(self, request, pk, format=None):

@@ -62,7 +62,7 @@ class EstudianteUsuario(models.Model):
 
 
 	def __str__(self):
-		return self.usuario.username
+		return "Estudiante {}, Grado {}".format(self.usuario.username, self.grado)
 
 
 class Notas_periodos(models.Model):

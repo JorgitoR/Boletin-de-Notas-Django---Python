@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from Dashboard.models import Notas_periodos, Usuario, Periodo
+from Dashboard.models import Notas_periodos, Usuario, Periodo, EstudianteUsuario
 
 class UsuarioSerializer(serializers.ModelSerializer):
 
@@ -12,6 +12,16 @@ class UsuarioSerializer(serializers.ModelSerializer):
 		]
 
 
+
+class EstudianteUserSerializer(serializers.ModelSerializer):
+	usuario = UsuarioSerializer(read_only=True)
+	class Meta:
+		model= EstudianteUsuario
+		fields = [
+			'usuario',
+			'grado',
+			
+		]
 
 class PeriodoSerializer(serializers.ModelSerializer):
 	
