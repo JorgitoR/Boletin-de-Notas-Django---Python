@@ -2,7 +2,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import Usuario, grado, EstudianteUsuario
+from .models import Usuario, grado, EstudianteUsuario, jornada
 
 class profesorRegistro(UserCreationForm):
 
@@ -18,6 +18,12 @@ class profesorRegistro(UserCreationForm):
 		return usuario
 
 class EstudiantesRegistro(UserCreationForm):
+
+	jornada = forms.ModelChoiceField(
+		queryset = jornada.objects.all(),
+		widget = forms.RadioSelect(),
+		required=True
+	)
 
 	grado = forms.ModelChoiceField(
 		queryset = grado.objects.all(),
@@ -35,7 +41,6 @@ class EstudiantesRegistro(UserCreationForm):
 			user.save()
 
 		grade = self.cleaned_data.get('grado')
-		print(grade)
-		gradoss = EstudianteUsuario.objects.create(usuario=user, grado=grade)
-	
+		jornada = self.cleaned_data.get('jornada')
+		gradoss = EstudianteUsuario.objects.create(usuario=user, grado=grade, jornada=jornada)
 		return user
