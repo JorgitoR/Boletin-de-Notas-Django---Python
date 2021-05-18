@@ -6,7 +6,7 @@
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item active">
 			<a>
-				Total de estudiante del <strong>{{request.GET.grados}}</strong> : <strong>({{grados.count}})</strong>
+				Total de estudiante del <strong>{{request.GET.grados}}</strong> : <strong>({{estudiantes.count}})</strong>
 			</a>
 		</li>
 
@@ -20,7 +20,7 @@
 			<th>
 				Estudiante
 			</th>
-			<th>
+			<th class="th_jornada">
 				Jornada
 			</th>
 			<th>
@@ -79,6 +79,10 @@
 	-ms-flex-align:center;
 	-webkit-align-items:center;
 	align-items: center;
+}
+
+.th_jornada{
+	text-align: center;
 }
 
 </style>

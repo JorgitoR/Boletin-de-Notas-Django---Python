@@ -25,6 +25,10 @@ def inicio(request):
 
 	return render(request, 'inicio.html')
 
+def regitrate_how(request):
+
+	return render(request, 'Usuario/indicaciones.html')
+
 class ProfesorRegistro(CreateView):
 	model = Usuario
 	form_class = profesorRegistro

@@ -4,7 +4,8 @@ from .views import (
 		Periodo, 
 		EstudianteRegistro, 
 		ProfesorRegistro,
-		inicio, 
+		inicio,
+		regitrate_how, 
 		ListaPeriodo, 
 		periodo_api,
 		lista_estudiante,
@@ -13,6 +14,7 @@ from .views import (
 urlpatterns = [
 
 	path('', inicio, name='inicio'),
+	path('indicaciones/', regitrate_how, name='regitrate_how'),
 
 	path('registro_estudiante/', EstudianteRegistro.as_view(), name='singup_estu'),
 	path('registro_profesor/', ProfesorRegistro.as_view(), name='singup_profe'),
