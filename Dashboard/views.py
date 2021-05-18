@@ -162,7 +162,7 @@ def looking(request):
 
 
     context ={
-        'grados':qs,
+        'estudiantes':qs,
         'labels':labels,
         'data':data
     }

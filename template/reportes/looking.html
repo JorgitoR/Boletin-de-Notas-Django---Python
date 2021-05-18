@@ -21,6 +21,9 @@
 				Estudiante
 			</th>
 			<th>
+				Jornada
+			</th>
+			<th>
 				Activo
 			</th>
 			<th>
@@ -30,11 +33,13 @@
 	</thead>
 	<tbody>
 		
-		{% for grado in grados %}
+		{% for estudiante in estudiantes %}
 		<tr>
-			<td>{{grado.usuario}}</td>
+			<td>{{estudiante.usuario}}</td>
 
-			{% if grado.usuario.activo %}
+			<td>{{estudiante.jornada.get_jornada}}</td>
+
+			{% if estudiante.usuario.activo %}
 			<td class="td_activo">
 				Activo: 
 				 <div style="background: #8bc34a; height: 10px; width: 10px;
@@ -48,7 +53,7 @@
 			</td>
 			{% endif %}
 
-			{% if grado.usuario.femenino %}
+			{% if estudiante.usuario.femenino %}
 			<td>Mujer</td>
 			{% else %}
 			<td>Hombre</td>

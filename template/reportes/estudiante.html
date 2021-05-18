@@ -16,7 +16,7 @@
 
 		  <div class="mb-3 container">
 
-            <p>Seleciona la Jornada</p>
+            Seleciona la Jornada
             <select id="jornada" class="form-control" name="jornadas">
               {% for jornada in jornada %}
               <option value="{{ jornada }}">{{ jornada }}</option>
@@ -25,6 +25,7 @@
 
             <br>
 
+            Seleciona el grado
             <select id="categoria" class="form-control" name="grados">
               
               {% for grado in grados %}
@@ -34,12 +35,15 @@
 
             <br>
 
+            Activos o No Activos
             <select id="categoria" class="form-control" name="activos">
               
               <option value="True">Activo</option>
               <option value="False">No Activo</option>
           
             </select>
+
+          <br>
 
          	<button type="submit" class="btn btn-success">
           		Generar Reporte
