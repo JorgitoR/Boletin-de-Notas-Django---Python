@@ -6,7 +6,7 @@ from django.views.generic import DetailView, CreateView, ListView
 from django.db.models import Avg
 
 from .forms import EstudiantesRegistro, profesorRegistro
-from .models import Usuario, EstudianteUsuario, grado
+from .models import Usuario, EstudianteUsuario, grado, jornada
 
 
 from django.contrib.auth import login
@@ -118,6 +118,7 @@ def parametro_query(param):
 
 def filtro(request):
     qs                        = EstudianteUsuario.objects.all()
+    jornada     = request.GET.get('jornadas')
     grado_qs     = request.GET.get('grados')
     activos = request.GET.get('activos')
 
@@ -127,6 +128,9 @@ def filtro(request):
     if parametro_query(grado_qs) and grado_qs != 'Elegir Grado':
         qs = qs.filter(grado__grado__icontains=grado_qs) 
 
+    if parametro_query(jornada):
+    	qs = qs.filter(jornada__nombre__icontains=jornada)
+
     return qs
 
 def lista_estudiante(request):
@@ -135,7 +139,8 @@ def lista_estudiante(request):
 	context = {
 
 		'filtro':qs,
-		'grados':grado.objects.all()
+		'jornada':jornada.objects.all(),
+		'grados':grado.objects.all(),
 
 	}
 

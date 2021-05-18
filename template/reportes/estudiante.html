@@ -16,6 +16,15 @@
 
 		  <div class="mb-3 container">
 
+            <p>Seleciona la Jornada</p>
+            <select id="jornada" class="form-control" name="jornadas">
+              {% for jornada in jornada %}
+              <option value="{{ jornada }}">{{ jornada }}</option>
+              {% endfor %}
+            </select>
+
+            <br>
+
             <select id="categoria" class="form-control" name="grados">
               
               {% for grado in grados %}

@@ -6,7 +6,8 @@ from .models import (
 	Notas_periodos, 
 	Periodo, 
 	EstudianteUsuario, 
-	grado)
+	grado,
+	jornada)
 
 
 class UsuarioInline(admin.TabularInline):
@@ -25,3 +26,4 @@ admin.site.register(Notas_periodos)
 admin.site.register(EstudianteUsuario)
 admin.site.register(Usuario)
 admin.site.register(grado)
+admin.site.register(jornada)
