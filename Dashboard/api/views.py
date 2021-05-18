@@ -73,27 +73,33 @@ class reporte_estudiante(APIView):
 	def get(self, request, pk, format=None):
 
 		labels = []
+		if request.user.is_authenticated:
+			if request.user.director:
+
+				grado_pk = grado.objects.get(pk=pk)
+				estudiante = EstudianteUsuario.objects.filter(grado=grado_pk)
 		
+				mujer = estudiante.filter(usuario__femenino=True)
+				count_m = mujer.count()
+				hombre = estudiante.filter(usuario__masculino=True)
+				count_h = hombre.count()
+				data = [count_m, count_h]
 
-		grado_pk = grado.objects.get(pk=pk)
-		estudiante = EstudianteUsuario.objects.filter(grado=grado_pk)
+				for estudiante in estudiante:
+					print(estudiante.usuario)
+					labels.append(estudiante.usuario.username)
+
+				print(labels)
+
+				return Response({
+
+					'data':data,
+					'labels':labels
 		
-		mujer = estudiante.filter(usuario__femenino=True)
-		count_m = mujer.count()
-		hombre = estudiante.filter(usuario__masculino=True)
-		count_h = hombre.count()
-		data = [count_m, count_h]
-
-		for estudiante in estudiante:
-			print(estudiante.usuario)
-			labels.append(estudiante.usuario.username)
-
-		print(labels)
-
+				})
 		return Response({
 
-			'data':data,
-			'labels':labels
+			'error':"No tienes permiso para aceder"
 		
 		})
 		

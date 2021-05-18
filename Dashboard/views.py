@@ -5,11 +5,13 @@ from django.views.generic import DetailView, CreateView, ListView
 
 from django.db.models import Avg
 
-from .forms import EstudiantesRegistro, profesorRegistro
+from .forms import EstudiantesRegistro, profesorRegistro, AuditorRegistro
 from .models import Usuario, EstudianteUsuario, grado, jornada
 
 
 from django.contrib.auth import login
+
+from django.http import Http404
 
 
 def inicio(request):
@@ -20,6 +22,8 @@ def inicio(request):
 			return redirect('ListaPeriodo')
 		elif request.user.director:
 			return redirect('reportes_estudiante')
+		elif request.user.auditor:
+			return redirect('reportes_estudiante')
 		else:
 			return redirect('inicio')
 
@@ -28,6 +32,21 @@ def inicio(request):
 def regitrate_how(request):
 
 	return render(request, 'Usuario/indicaciones.html')
+
+
+class AuditorR(CreateView):
+	model=Usuario
+	form_class=AuditorRegistro
+	template_name='Usuario/registro.html'
+
+	def get_context_data(self, **kwargs):
+		kwargs['keyy'] = 'Auditor'
+		return super().get_context_data(**kwargs)
+
+	def form_valid(self, form):
+		usuario = form.save()
+		login(self.request, usuario)
+		return redirect('inicio')
 
 class ProfesorRegistro(CreateView):
 	model = Usuario
@@ -153,22 +172,28 @@ def lista_estudiante(request):
 
 def looking(request):
 
-    qs = filtro(request)
-    print(qs)
 
-    mujeres = qs.filter(usuario__femenino=True)
-    contador_m = mujeres.count()
-    hombres = qs.filter(usuario__masculino=True)
-    contador_h = hombres.count()
+	if request.user.is_authenticated:
+		if request.user.auditor or request.user.director:
+			qs = filtro(request)
+			print(qs)
 
-    labels = ['mujeres', 'hombres']
-    data = [contador_m, contador_h]
+			mujeres = qs.filter(usuario__femenino=True)
+			contador_m = mujeres.count()
+			hombres = qs.filter(usuario__masculino=True)
+			contador_h = hombres.count()
+
+			labels = ['mujeres', 'hombres']
+			data = [contador_m, contador_h]
 
 
-    context ={
-        'estudiantes':qs,
-        'labels':labels,
-        'data':data
-    }
+			context ={
+    			'estudiantes':qs,
+    			'labels':labels,
+    			'data':data
+   			}
 
-    return render(request, 'reportes/looking.html', context)
+		else:
+   			raise Http404
+
+	return render(request, 'reportes/looking.html', context)

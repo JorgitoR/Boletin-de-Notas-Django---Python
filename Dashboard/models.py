@@ -5,11 +5,15 @@ from django.db.models.signals import pre_save, post_save
 
 from django.utils.html import mark_safe, escape
 
+
 class Usuario(AbstractUser):
-	director = models.BooleanField(default=False)
+
+	director = models.BooleanField(default=False) 
 	subdirector = models.BooleanField(default=False)
 	profesor = models.BooleanField(default=False)
 	estudiante = models.BooleanField(default=False)
+
+	auditor = models.BooleanField(default=False)
 
 	activo = models.BooleanField(default=True)
 

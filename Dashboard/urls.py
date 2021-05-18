@@ -9,7 +9,9 @@ from .views import (
 		ListaPeriodo, 
 		periodo_api,
 		lista_estudiante,
-		looking)
+		looking,
+
+		AuditorR)
 
 urlpatterns = [
 
@@ -26,5 +28,8 @@ urlpatterns = [
 
 	path('reportes/', lista_estudiante, name='reportes_estudiante'),
 	path('reportes/looking/', looking, name='looking'),
+
+	
+	path('AuditorR/', AuditorR.as_view(), name='AuditorR'),
 
 ]
