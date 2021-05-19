@@ -7,14 +7,14 @@
 		<div id="component1056378491766673668"><div class="form_shown login-form-container register index standard">
 
 			<form class="clearfix credentials-form register-form" method="post">
-			
+					{% csrf_token %}
 					<div class="register-form__name-fields">
 						<div class="text-input standard input-fname first text-input__margin-right">
 							<div class="text-input-error-wrapper"></div>
 							<div class="text-input-wrapper">
 
-								<input id="fname7739977497569195" type="text" class="text-input-input" name="fname" autocomplete="off" aria-invalid="false" value="">
-								<label for="fname7739977497569195" class="label_input">Usuario</label>
+								<input type="text" class="text-input-input" name="username" autofocus="" autocapitalize="none"  maxlength="150" required="" id="id_username">
+								<label for="id_username" class="label_input">Usuario</label>
 
 							</div>
 						</div>
@@ -22,8 +22,8 @@
 						<div class="text-input standard input-lname second">
 							<div class="text-input-error-wrapper"></div>
 							<div class="text-input-wrapper">
-								<input id="lname9261861411072596" type="text" class="text-input-input" name="lname" autocomplete="off" aria-invalid="false" value="">
-								<label for="lname9261861411072596" class="label_input">Contraseña</label>
+								<input type="password" class="text-input-input" name="password" autocomplete="current-password" required="" id="id_password">
+								<label for="id_password" class="label_input">Contraseña</label>
 							</div>
 						</div>
 
@@ -33,10 +33,12 @@
 
 				<div class="checkbox standard agree checkbox-inline">
 					<div class="text-input-error-wrapper"></div>
+					
 					<input type="checkbox" id="tos_agree035649770902267175" name="tos_agree" aria-checked="false">
 					<label for="tos_agree035649770902267175" class="checkbox_label">
 						<span>Acepto las <a href="/terms" target="_blank" rel="noreferrer noopener">Condiciones de Solinces</a></span>
 					</label>
+
 				</div>
 
 					<button class="login-button button-primary" type="submit" data-uxa-log="register_form_submit_button"><span>Iniciar Sesión</span></button><button class="auth-google button-primary button-undefined" type="button" data-uxa-log="google_signup_start"><span class="sign-up-text">Regístrate con Google</span></button><div class="recaptcha-v2-challenge-container recaptcha-v2-challenge-container--invisible"><div class="recaptcha_v2_challenge"></div></div>

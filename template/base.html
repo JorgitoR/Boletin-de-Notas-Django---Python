@@ -19,7 +19,10 @@
 
    <script src="{% static 'js/particles.js' %}" defer="defer"></script>
    <script src="{% static 'js/particulas.js' %}" defer="defer"></script>
- 
+        
+
+    <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+   <script src="{% static 'js/data.js' %}"></script> 
 
 </head>
 <body>
@@ -29,7 +32,7 @@
         {% block banner %}
         {% endblock %}
 
-    <div style="width: 90%; margin: 20px auto;">
+    <div style="width:100%; margin: 20px auto;">
         {% block contenido %}
         {% endblock %}
     </div>
