@@ -93,6 +93,7 @@ class reporte_estudiante(APIView):
 
 				return Response({
 
+					'jornada':estudiante.jornada.nombre,
 					'data':data,
 					'labels':labels
 		
