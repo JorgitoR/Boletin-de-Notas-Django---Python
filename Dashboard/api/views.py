@@ -31,7 +31,7 @@ from .serializers import NotaSerializer, PeriodoSerializer, EstudianteUserSerial
 from Dashboard.models import Notas_periodos, Usuario, Periodo, EstudianteUsuario, grado
 
 class Login(FormView):
-	template_name = 'Usuario/login.html'
+	template_name = 'inicio.html'
 	form_class = AuthenticationForm
 	success_url = reverse_lazy('inicio')
 

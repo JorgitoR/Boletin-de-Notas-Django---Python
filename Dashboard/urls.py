@@ -15,7 +15,7 @@ from .views import (
 
 urlpatterns = [
 
-	path('', inicio, name='inicio'),
+	path('inicio/', inicio, name='inicio'),
 	path('indicaciones/', regitrate_how, name='regitrate_how'),
 
 	path('registro_estudiante/', EstudianteRegistro.as_view(), name='singup_estu'),

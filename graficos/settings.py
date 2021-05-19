@@ -131,6 +131,13 @@ AUTH_USER_MODEL= 'Dashboard.usuario'
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    #No sera nuestro servidor, sera nuestro almacenamiento a largo plazo
+    os.path.join(BASE_DIR, "static"),
+ 
+]
+#sera nuestro servidor
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static-serve")
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

@@ -1,7 +1,46 @@
 {% extends 'base.html' %}
 
+{% block banner %}
 
-{% block contenido %}
 
+	<div class="grid_main">
+		<div class="div_login_main">
+			
+			{% include 'login.html' %}	
+
+		</div>
+		<div class="div_info">
+			
+   			 <div id="particles-js"></div>
+		</div>
+	</div>
+
+
+
+<style>
+
+body{
+}
+	
+	.grid_main{
+		display: grid;
+		grid-template-columns:auto 55%;
+	}
+
+	.div_login_main{
+		background: #fff;
+		height: 91vh;
+		max-width: 480px;
+		width: 100%;
+	}
+
+	#particles-js{
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		background: #333;
+	}
+
+</style>
 
 {% endblock %}
