@@ -167,7 +167,7 @@ def lista_estudiante(request):
 
 	}
 
-	return render(request, 'reportes/mindmap.html', context)
+	return render(request, 'reportes/estudiante.html', context)
 
 
 def looking(request):

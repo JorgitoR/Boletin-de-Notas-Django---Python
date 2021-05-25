@@ -20,6 +20,20 @@ class Usuario(AbstractUser):
 	femenino = models.BooleanField(default=False)
 	masculino = models.BooleanField(default=False)
 
+
+class institucion(models.Model):
+	nombre = models.CharField(max_length=100)
+	iden  = models.CharField(default='#99C9FF', max_length=7)
+
+	def __str__(self):
+		return self.nombre
+
+	def get_institucion(self):
+		nombre = escape(self.nombre)
+		iden = escape(self.iden)
+		html = '<span class="badge" style="color:#fff; background:%s">%s</span>' % (self.iden, self.nombre)
+		return mark_safe(html)
+
 class jornada(models.Model):
 	nombre = models.CharField(max_length=20)
 	color = models.CharField(default='#99C9FF', max_length=7)
@@ -80,6 +94,7 @@ class EstudianteUsuario(models.Model):
 		AFTERNOON = "AFTERNOON", "Afternoon"
 
 	usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE, primary_key=True)
+	institucion = models.ForeignKey(institucion, on_delete=models.CASCADE)
 	grado  = models.ForeignKey(grado, on_delete=models.CASCADE, null=True)
 	jornada = models.ForeignKey(jornada, on_delete=models.CASCADE, null=True)
 	periodos = models.ManyToManyField(Periodo, through='Notas_periodos')
